@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <div class="navbar">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <div class="right-content" id="profileInfo">
+        </div>
+    </div>  
+
+    <script>
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("profileInfo").innerHTML = this.responseText;
+                setupLogout(); 
+            }
+        };
+        xhttp.open("GET", "php/process_dashboard.php", true);
+        xhttp.send();
+
+        function setupLogout() {
+            var logoutButton = document.getElementById("logoutButton");
+
+            if (logoutButton) {
+                logoutButton.addEventListener("click", function() {
+                    var logoutXhttp = new XMLHttpRequest();
+                    logoutXhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            location.reload();
+                        }
+                    };
+                    logoutXhttp.open("GET", "php/logout.php", true);
+                    logoutXhttp.send();
+                });
+            }
+        }
+
+        function signIn() {
+            window.location.href = "login_form.html"; 
+        }
+
+        function signUp() {
+            window.location.href = "registration_form.html"; 
+        }
+    </script>
+</body>
+</html>
