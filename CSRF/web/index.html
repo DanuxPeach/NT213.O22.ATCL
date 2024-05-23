@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <div class="navbar">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <div class="right-content" id="profileInfo"></div>
+    </div> 
+    <div class="change-account" id="change-account"></div> 
+    <script>
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var response = JSON.parse(this.responseText); // Phân tích nội dung JSON phản hồi từ máy chủ
+                document.getElementById("profileInfo").innerHTML = response.profileInfo; // Cập nhật thông tin người dùng
+                setupLogout(); // Thiết lập chức năng logout
+                document.getElementById("change-account").innerHTML = response.changeAccount; // Cập nhật form thay đổi tài khoản
+                setupChangeAccount(); // Thiết lập xử lý form thay đổi tài khoản
+            }
+        };
+        xhttp.open("GET", "php/process_dashboard.php", true);
+        xhttp.send();
+
+        function setupLogout() {
+            var logoutButton = document.getElementById("logoutButton");
+
+            if (logoutButton) {
+                logoutButton.addEventListener("click", function() {
+                    var logoutXhttp = new XMLHttpRequest();
+                    logoutXhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            var changeAccountElement = document.querySelector('.change-account');
+                            changeAccountElement.style.display = 'none';
+                            location.reload();
+                        }
+                    };
+                    logoutXhttp.open("GET", "php/logout.php", true);
+                    logoutXhttp.send();
+                });
+            }
+        }
+
+        function loginSuccess() {
+            var changeAccountElement = document.querySelector('.change-account');
+            if (changeAccountElement) {
+                changeAccountElement.style.display = 'block';
+            }
+        }
+
+        function signIn() {
+            window.location.href = "login_form.html"; 
+        }
+
+        function signUp() {
+            window.location.href = "registration_form.html"; 
+        }
+
+        // Xử lý form thay đổi tài khoản
+        function setupChangeAccount() {
+            document.getElementById('changeAccountForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                var Username = document.getElementById('Username').value;
+                var newPassword = document.getElementById('newPassword').value;
+
+                var changeXhttp = new XMLHttpRequest();
+                changeXhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        alert('Account info changed successfully.');
+                    }
+                };
+                changeXhttp.open("POST", "php/change_account.php", true);
+                changeXhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                changeXhttp.send("Username=" + Username + "&newPassword=" + newPassword);
+            });
+        }
+    </script>
+</body>
+</html>

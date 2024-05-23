@@ -1,0 +1,75 @@
+.navbar {
+    background-color: #f2f2f2;
+    overflow: hidden;
+}
+
+.navbar a {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.navbar a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.navbar .right-content {
+    float: right;
+    padding: 14px 16px;
+}
+
+#logoutButton,
+#signInButton,
+#signUpButton {
+    background-color: #333; 
+    color: white; 
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-right: 5px; 
+}
+
+#logoutButton:hover,
+#signInButton:hover,
+#signUpButton:hover {
+    background-color: #555; 
+}
+
+#profileInfo {
+    display: inline-block; 
+    margin-right: 10px; 
+}
+
+.change-account {
+    margin-top: 20px;
+}
+
+.change-account h2 {
+    font-size: 1.5em;
+}
+
+.change-account form {
+    display: flex;
+    flex-direction: column;
+}
+
+.change-account label {
+    margin-top: 10px;
+}
+
+.change-account input {
+    margin-top: 5px;
+    padding: 5px;
+    font-size: 1em;
+}
+
+.change-account button {
+    margin-top: 15px;
+    padding: 10px;
+    font-size: 1em;
+    cursor: pointer;
+}

@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: ./nginx/DockerFile
+    volumes:
+      - ./web:/var/www/html
+    ports:
+      - "8080:80"
+    depends_on:
+      - app
+      - mysql
+  app:
+    build:
+      context: .
+      dockerfile: ./web/DockerFile
+    ports:
+      - "4000:4000"
+    depends_on:
+      - mysql
+    environment:
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypassword
+      MYSQL_DATABASE: mydatabase
+    volumes:
+      - ./web:/var/www/html
+
+  mysql:
+    build:
+      context: .
+      dockerfile: ./mysql/DockerFile
+    environment:
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: myuser
+      MYSQL_PASSWORD: mypassword
+      MYSQL_ROOT_PASSWORD: rootpassword
+    ports:
+      - "3306:3306"
