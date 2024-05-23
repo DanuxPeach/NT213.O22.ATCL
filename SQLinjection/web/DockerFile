@@ -2,8 +2,6 @@ FROM php:8.2-fpm
 
 COPY ./web/*.html /var/www/html/
 
-COPY ./web/jquery.js /var/www/html/
-
 COPY ./web/css /var/www/html/css
 
 COPY ./web/php /var/www/html/php
