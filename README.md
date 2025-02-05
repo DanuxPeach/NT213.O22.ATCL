@@ -38,6 +38,6 @@ The project includes web applications with the following security flaws:
 2. **Deploy the vulnerable applications using Docker or a local server.**
 3. **Configure Acunetix to scan each application.**
 4. **Analyze results and document detected vulnerabilities.**
-5. 
+   
 ## 📄 Report
 **All Acunetix scan results, vulnerability analysis, and remediation recommendations are compiled in Report.pdf.**
