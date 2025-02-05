@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: ./nginx/DockerFile
+    volumes:
+      - ./web:/var/www/html
+    ports:
+      - "8080:80"
+    depends_on:
+      - app
+  app:
+    build:
+      context: .
+      dockerfile: ./web/DockerFile
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./web:/var/www/html
+      - ./uploads:/uploads

@@ -1,0 +1,9 @@
+FROM php:8.2-fpm
+
+COPY ./web/*.html /var/www/html/
+
+COPY ./web/css /var/www/html/css
+
+COPY ./web/php /var/www/html/php
+
+RUN docker-php-ext-install mysqli && docker-php-ext-enable mysqli
